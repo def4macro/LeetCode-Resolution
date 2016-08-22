@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 #include <vector>
+#include <iostream>
+
 
 using namespace std;
 
@@ -27,6 +29,25 @@ public:
 				nums[index++] = nums[i];
 			}
 		}
+
+		return index;
+	}
+
+	int removeDuplicatesExtend(vector<int>& nums)
+	{
+		const int n = nums.size();
+		int index = 0;
+		for (int i = 0; i < n; ++i)
+		{
+			if (i > 0 && i < n - 1 && nums[i] == nums[i - 1] && nums[i] == nums[i + 1])
+			{
+				continue;
+			}
+
+			nums[index++] = nums[i];
+		}
+
+		return index;
 	}
 
 private:
@@ -43,6 +64,24 @@ MyClass::~MyClass()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	vector<int> numbers = { 0, 1, 1, 1, 2, 2, 3 };
+	MyClass solution = MyClass();
+	int length = solution.removeDuplicates(numbers);
+	cout << length << endl;
+	for (int i = 0; i < length; i++)
+	{
+		cout << numbers[i] << " ";
+	}
+	cout << endl;
+
+	numbers = { 0, 1, 1, 1, 2, 2, 3 };
+	length = solution.removeDuplicatesExtend(numbers);
+	for (int i = 0; i < length; i++)
+	{
+		cout << numbers[i] << " ";
+	}
+	cout << endl;
+
 	return 0;
 }
 
